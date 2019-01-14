@@ -1,0 +1,1288 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{student}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Final Project Submission}\label{final-project-submission}
+
+Please fill out: * Student name: Shannon McChesney * Student pace: self
+paced * Scheduled project review date/time: * Instructor name: * Blog
+post URL:
+
+    First we will import the appropriate programs/libraries to assist us in
+our analysis:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    Next we will import the dataset,
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{kings} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kc\PYZus{}house\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    and preview the first few lines:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}            id        date     price  bedrooms  bathrooms  sqft\_living  \textbackslash{}
+         0  7129300520  10/13/2014  221900.0         3       1.00         1180   
+         1  6414100192   12/9/2014  538000.0         3       2.25         2570   
+         2  5631500400   2/25/2015  180000.0         2       1.00          770   
+         3  2487200875   12/9/2014  604000.0         4       3.00         1960   
+         4  1954400510   2/18/2015  510000.0         3       2.00         1680   
+         
+            sqft\_lot  floors  waterfront  view     {\ldots}      grade  sqft\_above  \textbackslash{}
+         0      5650     1.0         NaN   0.0     {\ldots}          7        1180   
+         1      7242     2.0         0.0   0.0     {\ldots}          7        2170   
+         2     10000     1.0         0.0   0.0     {\ldots}          6         770   
+         3      5000     1.0         0.0   0.0     {\ldots}          7        1050   
+         4      8080     1.0         0.0   0.0     {\ldots}          8        1680   
+         
+            sqft\_basement yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+         0            0.0     1955           0.0    98178  47.5112 -122.257   
+         1          400.0     1951        1991.0    98125  47.7210 -122.319   
+         2            0.0     1933           NaN    98028  47.7379 -122.233   
+         3          910.0     1965           0.0    98136  47.5208 -122.393   
+         4            0.0     1987           0.0    98074  47.6168 -122.045   
+         
+            sqft\_living15  sqft\_lot15  
+         0           1340        5650  
+         1           1690        7639  
+         2           2720        8062  
+         3           1360        5000  
+         4           1800        7503  
+         
+         [5 rows x 21 columns]
+\end{Verbatim}
+            
+    Now that we have a preview of the data, we'll find out more information
+on the number of entries, the means, standard deviation, and more that
+we can use to decide how to tidy our data before processing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}                  id         price      bedrooms     bathrooms   sqft\_living  \textbackslash{}
+         count  2.159700e+04  2.159700e+04  21597.000000  21597.000000  21597.000000   
+         mean   4.580474e+09  5.402966e+05      3.373200      2.115826   2080.321850   
+         std    2.876736e+09  3.673681e+05      0.926299      0.768984    918.106125   
+         min    1.000102e+06  7.800000e+04      1.000000      0.500000    370.000000   
+         25\%    2.123049e+09  3.220000e+05      3.000000      1.750000   1430.000000   
+         50\%    3.904930e+09  4.500000e+05      3.000000      2.250000   1910.000000   
+         75\%    7.308900e+09  6.450000e+05      4.000000      2.500000   2550.000000   
+         max    9.900000e+09  7.700000e+06     33.000000      8.000000  13540.000000   
+         
+                    sqft\_lot        floors    waterfront          view     condition  \textbackslash{}
+         count  2.159700e+04  21597.000000  19221.000000  21534.000000  21597.000000   
+         mean   1.509941e+04      1.494096      0.007596      0.233863      3.409825   
+         std    4.141264e+04      0.539683      0.086825      0.765686      0.650546   
+         min    5.200000e+02      1.000000      0.000000      0.000000      1.000000   
+         25\%    5.040000e+03      1.000000      0.000000      0.000000      3.000000   
+         50\%    7.618000e+03      1.500000      0.000000      0.000000      3.000000   
+         75\%    1.068500e+04      2.000000      0.000000      0.000000      4.000000   
+         max    1.651359e+06      3.500000      1.000000      4.000000      5.000000   
+         
+                       grade    sqft\_above      yr\_built  yr\_renovated       zipcode  \textbackslash{}
+         count  21597.000000  21597.000000  21597.000000  17755.000000  21597.000000   
+         mean       7.657915   1788.596842   1970.999676     83.636778  98077.951845   
+         std        1.173200    827.759761     29.375234    399.946414     53.513072   
+         min        3.000000    370.000000   1900.000000      0.000000  98001.000000   
+         25\%        7.000000   1190.000000   1951.000000      0.000000  98033.000000   
+         50\%        7.000000   1560.000000   1975.000000      0.000000  98065.000000   
+         75\%        8.000000   2210.000000   1997.000000      0.000000  98118.000000   
+         max       13.000000   9410.000000   2015.000000   2015.000000  98199.000000   
+         
+                         lat          long  sqft\_living15     sqft\_lot15  
+         count  21597.000000  21597.000000   21597.000000   21597.000000  
+         mean      47.560093   -122.213982    1986.620318   12758.283512  
+         std        0.138552      0.140724     685.230472   27274.441950  
+         min       47.155900   -122.519000     399.000000     651.000000  
+         25\%       47.471100   -122.328000    1490.000000    5100.000000  
+         50\%       47.571800   -122.231000    1840.000000    7620.000000  
+         75\%       47.678000   -122.125000    2360.000000   10083.000000  
+         max       47.777600   -121.315000    6210.000000  871200.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 21597 entries, 0 to 21596
+Data columns (total 21 columns):
+id               21597 non-null int64
+date             21597 non-null object
+price            21597 non-null float64
+bedrooms         21597 non-null int64
+bathrooms        21597 non-null float64
+sqft\_living      21597 non-null int64
+sqft\_lot         21597 non-null int64
+floors           21597 non-null float64
+waterfront       19221 non-null float64
+view             21534 non-null float64
+condition        21597 non-null int64
+grade            21597 non-null int64
+sqft\_above       21597 non-null int64
+sqft\_basement    21597 non-null object
+yr\_built         21597 non-null int64
+yr\_renovated     17755 non-null float64
+zipcode          21597 non-null int64
+lat              21597 non-null float64
+long             21597 non-null float64
+sqft\_living15    21597 non-null int64
+sqft\_lot15       21597 non-null int64
+dtypes: float64(8), int64(11), object(2)
+memory usage: 3.5+ MB
+
+    \end{Verbatim}
+
+    From the above column data we can tell that some of the columns have
+missing values. We can see how many below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} id                  0
+         date                0
+         price               0
+         bedrooms            0
+         bathrooms           0
+         sqft\_living         0
+         sqft\_lot            0
+         floors              0
+         waterfront       2376
+         view               63
+         condition           0
+         grade               0
+         sqft\_above          0
+         sqft\_basement       0
+         yr\_built            0
+         yr\_renovated     3842
+         zipcode             0
+         lat                 0
+         long                0
+         sqft\_living15       0
+         sqft\_lot15          0
+         dtype: int64
+\end{Verbatim}
+            
+    The waterfront column contains boolean values (Yes, it is a waterfront
+property or No, it isn't.) For practicality's sake, and since the null
+values make up roughly 18\% of the missing values, we can go ahead and
+mark them as "Not Waterfront".
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{view}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{view}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{view}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{view}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{yr\PYZus{}renovated}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{yr\PYZus{}renovated}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{kings}\PY{o}{.}\PY{n}{yr\PYZus{}renovated}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 0
+\end{Verbatim}
+            
+    Now that we've replaced the null values, let's view the data in
+histograms to get a visual idea of our data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{kings}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x1145e7518>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x115e29a20>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x115ef0160>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x115f15860>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x115ea8f60>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x115ea8f98>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116347d68>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x115f5a4a8>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x1164c2ba8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1164f42e8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116ab89e8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1145fd128>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x114624828>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1161e8f28>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x11673d668>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116768d68>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x116b314a8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116b56ba8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116b872e8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x116bad9e8>]],
+               dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Judging from the histograms above, the data needs to be cleaned before
+any relationship can be found. Some of the data, like the zipcode, needs
+to be modified to be categorical, while other data like Waterfront need
+to be changed to be boolean values.
+
+    The first question we will focus on is which of the variable best
+correlates to house selling price. Certain variables such as latitute
+and longitude are not independently useful to us.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{data} \PY{o}{=} \PY{n}{kings}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}       price  zipcode  waterfront  sqft\_living  grade  bathrooms  floors  \textbackslash{}
+         0  221900.0    98178         0.0         1180      7       1.00     1.0   
+         1  538000.0    98125         0.0         2570      7       2.25     2.0   
+         2  180000.0    98028         0.0          770      6       1.00     1.0   
+         3  604000.0    98136         0.0         1960      7       3.00     1.0   
+         4  510000.0    98074         0.0         1680      8       2.00     1.0   
+         
+            condition  sqft\_lot  yr\_built  
+         0          3      5650      1955  
+         1          3      7242      1951  
+         2          3     10000      1933  
+         3          5      5000      1965  
+         4          3      8080      1987  
+\end{Verbatim}
+            
+    We will view the data in a heatmap to see the level of correlation
+between price and the other variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n}{corr} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{corr}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{n}{mask}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices\PYZus{}from}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{k+kc}{True}
+         
+         
+         \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{cmap} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{diverging\PYZus{}palette}\PY{p}{(}\PY{l+m+mi}{220}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{as\PYZus{}cmap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{n}{mask}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{center}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{cbar\PYZus{}kws}\PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shrink}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a2196e0f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    According to the above heatmap, there seems to be a correlation between
+price and the following variables: Square Feet of Living Space, Grade,
+Number of Bathrooms, and Floors. We can also see that there is a
+negative correlation between Year Built and Zip Code, as well as Year
+Built and Condition.
+
+    Now we we clarify what we have seen in the heatmap, using scatterplots
+to see the individual spread between each of the columns above and
+price.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{price}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{column}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There is a great deal of heteroscedascity in the square feet of living
+space, grade, and number of bathrooms scatterplots.
+
+In order to clean up the data, we will normalize
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{data}\PY{o}{.}\PY{n}{zipcode} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{zipcode} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{zipcode}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{zipcode}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{waterfront} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{waterfront} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{waterfront}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{grade} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{grade} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{grade}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{grade}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{bathrooms} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{bathrooms} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{bathrooms}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{bathrooms}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{floors} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{floors} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{floors}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{floors}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{condition} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{condition} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{condition}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{condition}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}lot} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}lot} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}lot}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}lot}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{yr\PYZus{}built} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{yr\PYZus{}built} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{yr\PYZus{}built}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data}\PY{o}{.}\PY{n}{yr\PYZus{}built}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yr\PYZus{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{price}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{column}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the scatter plots, we can see a clear linear relationship between
+price and square feet of living space, price and number of bathrooms,
+and price and grade.
+
+We will take a look at the correlation between price and the other
+variables below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k}{def} \PY{n+nf}{mean\PYZus{}normalize}\PY{p}{(}\PY{n}{var}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{norm} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{var}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{var}\PY{p}{:}
+                 \PY{n}{diff} \PY{o}{=} \PY{n}{var}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{mean}
+                 \PY{n}{norm}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{diff}\PY{p}{)}
+                 \PY{n}{n} \PY{o}{=} \PY{n}{n} \PY{o}{+} \PY{l+m+mi}{1}
+             
+             \PY{k}{return} \PY{n}{norm}
+         
+         \PY{k}{def} \PY{n+nf}{correlation}\PY{p}{(}\PY{n}{var1}\PY{p}{,}\PY{n}{var2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{var1}\PY{p}{)} \PY{o}{!=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{var2}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{k+kc}{None}
+             \PY{k}{else}\PY{p}{:} 
+                 \PY{n}{mean\PYZus{}norm\PYZus{}var1} \PY{o}{=} \PY{n}{mean\PYZus{}normalize}\PY{p}{(}\PY{n}{var1}\PY{p}{)}
+                 \PY{n}{mean\PYZus{}norm\PYZus{}var2} \PY{o}{=} \PY{n}{mean\PYZus{}normalize}\PY{p}{(}\PY{n}{var2}\PY{p}{)}
+                 
+                 \PY{n}{var1\PYZus{}dot\PYZus{}var2} \PY{o}{=} \PY{p}{[}\PY{n}{a} \PY{o}{*} \PY{n}{b} \PY{k}{for} \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{mean\PYZus{}norm\PYZus{}var1}\PY{p}{,} \PY{n}{mean\PYZus{}norm\PYZus{}var2}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{var1\PYZus{}squared} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{o}{*} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{mean\PYZus{}norm\PYZus{}var1}\PY{p}{]}
+                 \PY{n}{var2\PYZus{}squared} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{o}{*} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{mean\PYZus{}norm\PYZus{}var2}\PY{p}{]}
+                 
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{var1\PYZus{}dot\PYZus{}var2}\PY{p}{)} \PY{o}{/} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{var1\PYZus{}squared}\PY{p}{)} \PY{o}{*} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{var2\PYZus{}squared}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             
+         
+         \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 0.53
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 0.7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zipcode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} -0.05
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterfront}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 0.26
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} 0.67
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} 0.26
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} 0.04
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{correlation}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}lot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} 0.09
+\end{Verbatim}
+            
+    From the above data, we can tell that there is a slight positive
+correlation between between price and the number of bathrooms. There is
+also a moderate positive correlation between price and grade and price
+and the square footage of living space. So far the strongest indicator
+of home price is the amount of square footage in the living area at a
+correlation of 0.7. However, any correlation lower than .85 isn't really
+enough for us to confidently say that there is a strong correlation
+between the two variables.
+
+This follows what one would expect. However, it may be surprising to
+some that condition has such a weak correlation. It may be surprising to
+some that the number of bathrooms correlate to house price as much as
+they do.
+
+Below we will focus on the strongest correlating variables that we have:
+grade, sqft\_living, and number of bathrooms.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axs} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{channel} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{channel}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axs}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{channel}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf}
+         \PY{n}{f1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZti{}grade}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{f2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZti{}sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{f3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZti{}bathrooms}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{model1} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{n}{f1}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model2} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{n}{f2}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model3} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{n}{f3}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{model1}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <class 'statsmodels.iolib.summary.Summary'>
+         """
+                                     OLS Regression Results                            
+         ==============================================================================
+         Dep. Variable:                  price   R-squared:                       0.446
+         Model:                            OLS   Adj. R-squared:                  0.446
+         Method:                 Least Squares   F-statistic:                 1.740e+04
+         Date:                Sun, 13 Jan 2019   Prob (F-statistic):               0.00
+         Time:                        17:11:16   Log-Likelihood:            -3.0101e+05
+         No. Observations:               21597   AIC:                         6.020e+05
+         Df Residuals:                   21595   BIC:                         6.020e+05
+         Df Model:                           1                                         
+         Covariance Type:            nonrobust                                         
+         ==============================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+         ------------------------------------------------------------------------------
+         Intercept  -1.061e+06   1.23e+04    -86.396      0.000   -1.09e+06   -1.04e+06
+         grade       2.092e+05   1585.790    131.895      0.000    2.06e+05    2.12e+05
+         ==============================================================================
+         Omnibus:                    19879.964   Durbin-Watson:                   1.968
+         Prob(Omnibus):                  0.000   Jarque-Bera (JB):          2043898.709
+         Skew:                           4.081   Prob(JB):                         0.00
+         Kurtosis:                      49.954   Cond. No.                         52.0
+         ==============================================================================
+         
+         Warnings:
+         [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+         """
+\end{Verbatim}
+            
+    From the OLS Regression Analysis of the relationship between price and
+grade, the R-Squared Value of .44 indicates that although there may seem
+to be a relationship between price and grade, it is statistically
+insignificant. The Jarque-Bera (JB) results show an extremely high level
+of deviation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{model2}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <class 'statsmodels.iolib.summary.Summary'>
+         """
+                                     OLS Regression Results                            
+         ==============================================================================
+         Dep. Variable:                  price   R-squared:                       0.493
+         Model:                            OLS   Adj. R-squared:                  0.493
+         Method:                 Least Squares   F-statistic:                 2.097e+04
+         Date:                Sun, 13 Jan 2019   Prob (F-statistic):               0.00
+         Time:                        17:11:25   Log-Likelihood:            -3.0006e+05
+         No. Observations:               21597   AIC:                         6.001e+05
+         Df Residuals:                   21595   BIC:                         6.001e+05
+         Df Model:                           1                                         
+         Covariance Type:            nonrobust                                         
+         ===============================================================================
+                           coef    std err          t      P>|t|      [0.025      0.975]
+         -------------------------------------------------------------------------------
+         Intercept   -4.399e+04   4410.023     -9.975      0.000   -5.26e+04   -3.53e+04
+         sqft\_living   280.8630      1.939    144.819      0.000     277.062     284.664
+         ==============================================================================
+         Omnibus:                    14801.942   Durbin-Watson:                   1.982
+         Prob(Omnibus):                  0.000   Jarque-Bera (JB):           542662.604
+         Skew:                           2.820   Prob(JB):                         0.00
+         Kurtosis:                      26.901   Cond. No.                     5.63e+03
+         ==============================================================================
+         
+         Warnings:
+         [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+         [2] The condition number is large, 5.63e+03. This might indicate that there are
+         strong multicollinearity or other numerical problems.
+         """
+\end{Verbatim}
+            
+    The OLS Regression Analysis of the relationship between price and square
+feet of living space appeared to be the most promising from our previous
+analyses. Here, however, we see that the R-Squared value of .493 is
+hardly any improvement on the relationship between price and grade.
+
+The Jarque-Bera score is also far too high.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{model3}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} <class 'statsmodels.iolib.summary.Summary'>
+         """
+                                     OLS Regression Results                            
+         ==============================================================================
+         Dep. Variable:                  price   R-squared:                       0.277
+         Model:                            OLS   Adj. R-squared:                  0.277
+         Method:                 Least Squares   F-statistic:                     8256.
+         Date:                Sun, 13 Jan 2019   Prob (F-statistic):               0.00
+         Time:                        17:11:29   Log-Likelihood:            -3.0389e+05
+         No. Observations:               21597   AIC:                         6.078e+05
+         Df Residuals:                   21595   BIC:                         6.078e+05
+         Df Model:                           1                                         
+         Covariance Type:            nonrobust                                         
+         ==============================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+         ------------------------------------------------------------------------------
+         Intercept   8712.6518   6224.769      1.400      0.162   -3488.356    2.09e+04
+         bathrooms   2.512e+05   2765.054     90.863      0.000    2.46e+05    2.57e+05
+         ==============================================================================
+         Omnibus:                    17251.570   Durbin-Watson:                   1.960
+         Prob(Omnibus):                  0.000   Jarque-Bera (JB):           882735.889
+         Skew:                           3.452   Prob(JB):                         0.00
+         Kurtosis:                      33.550   Cond. No.                         7.76
+         ==============================================================================
+         
+         Warnings:
+         [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+         """
+\end{Verbatim}
+            
+    Here, the relationship between price and the number of bathrooms is even
+weaker than the previous two relationships, as indicated by the
+R-Squared value of .277. The Jarque-Bera score is also much higher than
+the other two relationships.
+
+Next, we will view the "goodness of fit" between the independent and
+dependant variables for each of our three columns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{X\PYZus{}new1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{grade}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{grade}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}new1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds} \PY{o}{=} \PY{n}{model1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}new1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}new1}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   grade
+0      3
+1     13
+0   -4.339427e+05
+1    1.657635e+06
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{X\PYZus{}new2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{sqft\PYZus{}living}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}new2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds} \PY{o}{=} \PY{n}{model2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}new2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+         
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}new2}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   sqft\_living
+0          370
+1        13540
+0    5.993042e+04
+1    3.758896e+06
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{X\PYZus{}new3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{bathrooms}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{bathrooms}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}new3}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{preds} \PY{o}{=} \PY{n}{model3}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}new3}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+         
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}new3}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   bathrooms
+0        0.5
+1        8.0
+0    1.343335e+05
+1    2.018647e+06
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{fig1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig1} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{plot\PYZus{}regress\PYZus{}exog}\PY{p}{(}\PY{n}{model1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fig}\PY{o}{=}\PY{n}{fig1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{fig2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig2} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{plot\PYZus{}regress\PYZus{}exog}\PY{p}{(}\PY{n}{model2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fig}\PY{o}{=}\PY{n}{fig2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{fig3} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig3} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{plot\PYZus{}regress\PYZus{}exog}\PY{p}{(}\PY{n}{model3}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fig}\PY{o}{=}\PY{n}{fig3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above regression models, we can see that there is a poorness of
+fit between price and the independent variables (grade, square feet of
+living space, and number of bathrooms).
+
+Below we will apply log to minimize the effects of skewedness on the
+variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{data\PYZus{}log}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{condition}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}lot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}lot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{data\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    As a final step, we will test/train our data with our most promising
+three categories. We will do this using a k-folds cross-validation
+analysis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqft\PYZus{}living}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{price}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{n}{linreg} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{linreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}hat\PYZus{}train} \PY{o}{=} \PY{n}{linreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+         \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{=} \PY{n}{linreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}residuals} \PY{o}{=} \PY{n}{y\PYZus{}hat\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}train}
+         \PY{n}{test\PYZus{}residuals} \PY{o}{=} \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}test}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         \PY{n}{train\PYZus{}mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}hat\PYZus{}train}\PY{p}{)}
+         \PY{n}{test\PYZus{}mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+16197 5400 16197 5400
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{kfolds}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+             \PY{n}{num\PYZus{}observations} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+             \PY{n}{fold\PYZus{}size} \PY{o}{=} \PY{n}{num\PYZus{}observations}\PY{o}{/}\PY{o}{/}\PY{n}{k}
+             \PY{n}{leftovers} \PY{o}{=} \PY{n}{num\PYZus{}observations}\PY{o}{\PYZpc{}}\PY{k}{k}
+             \PY{n}{folds} \PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{n}{start\PYZus{}obs} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{fold\PYZus{}n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{fold\PYZus{}n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{leftovers}\PY{p}{:}
+                     \PY{n}{fold} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{start\PYZus{}obs} \PY{p}{:} \PY{n}{start\PYZus{}obs}\PY{o}{+}\PY{n}{fold\PYZus{}size}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n}{folds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fold}\PY{p}{)}
+                     \PY{n}{start\PYZus{}obs} \PY{o}{+}\PY{o}{=} \PY{n}{fold\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}
+                 \PY{k}{else}\PY{p}{:} 
+                     \PY{n}{fold} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{start\PYZus{}obs} \PY{p}{:} \PY{n}{start\PYZus{}obs} \PY{o}{+} \PY{n}{fold\PYZus{}size}\PY{p}{]}
+                     \PY{n}{folds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fold}\PY{p}{)}
+                     \PY{n}{start\PYZus{}obs} \PY{o}{+}\PY{o}{=} \PY{n}{fold\PYZus{}size}
+                       
+             \PY{k}{return} \PY{n}{folds}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{folds} \PY{o}{=} \PY{n}{kfolds}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{test\PYZus{}errs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{train\PYZus{}errs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{3}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{fold} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{fold} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{folds}\PY{p}{)} \PY{k}{if} \PY{n}{i}\PY{o}{!=}\PY{n}{n}\PY{p}{]}\PY{p}{)}
+             \PY{n}{test} \PY{o}{=} \PY{n}{folds}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+             
+             \PY{n}{linreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{n}{y}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+             
+             \PY{n}{y\PYZus{}hat\PYZus{}train} \PY{o}{=} \PY{n}{linreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+             \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{=} \PY{n}{linreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{]}\PY{p}{)}
+             \PY{n}{train\PYZus{}residuals} \PY{o}{=} \PY{n}{y\PYZus{}hat\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{train}\PY{p}{[}\PY{n}{y}\PY{o}{.}\PY{n}{columns}\PY{p}{]}
+             \PY{n}{test\PYZus{}residuals} \PY{o}{=} \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{test}\PY{p}{[}\PY{n}{y}\PY{o}{.}\PY{n}{columns}\PY{p}{]}
+             \PY{n}{train\PYZus{}errs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{train\PYZus{}residuals}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}errs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{test\PYZus{}residuals}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}errs}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}errs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[price    6.052874e+10
+dtype: float64, price    6.306768e+10
+dtype: float64, price    6.363588e+10
+dtype: float64]
+[price    6.632291e+10
+dtype: float64, price    6.119814e+10
+dtype: float64, price    6.019170e+10
+dtype: float64]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         
+         \PY{n}{cv\PYZus{}3\PYZus{}results} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{linreg}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg\PYZus{}mean\PYZus{}squared\PYZus{}error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{cv\PYZus{}3\PYZus{}results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} array([-6.63229127e+10, -6.11981382e+10, -6.01916972e+10])
+\end{Verbatim}
+            
+    From our above test/train data we can see that our algorithm fits the
+model as expected.
+
+In conclusion, although none of the data columns presented show a
+convincing level of correlation to housing price, square feet of living
+space shows the greatest amount of promise. More data should be
+collected and processed before any firm conclusions can be made and
+acted upon.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
